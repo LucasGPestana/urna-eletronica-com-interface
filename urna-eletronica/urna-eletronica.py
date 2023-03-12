@@ -101,11 +101,16 @@ def validarInformacoes():
     nome = input_nome.get()
 
     padrao_nome = re.compile("^[\S][a-zA-Z\s\D]+")
+    padrao2_nome = re.compile("[\S]")
 
     if re.fullmatch(padrao_nome, nome) == None:
         res_nome['text'] = "Nome inválido!\n"
         res_nome['text'] += "Digite-o novamente!"
         input_nome.delete(0, tkinter.END)
+    elif re.fullmatch(padrao2_nome, nome) == None:
+        res_nome['text'] = "Nome inválido!\n"
+        res_nome['text'] += "Digite-o novamente!"
+        input_nome.delete(0, tkinter.END)   
     else:
         exist_nome = True
         res_nome['text'] = ""
