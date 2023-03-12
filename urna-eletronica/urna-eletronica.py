@@ -4,14 +4,6 @@ font_family = ("Arial 10")
 font_color = "#FFFFFF"
 background = "#1e1e1e"
 
-window_tempo_data = tkinter.Tk()
-window_tempo_data.title("Informação Tempo/Data")
-window_tempo_data.configure(background=background)
-window_tempo_data.geometry("350x50")
-
-txt_tempo_data = tkinter.Label(master=window_tempo_data, bg=background, font=font_family, fg=font_color, anchor="w", text="")
-txt_tempo_data.grid(padx=10, pady=10)
-
 def limpaTela():
     
     os.system('cls') or None
@@ -63,10 +55,12 @@ def isValidTime():
 
     if horario_atual >= horario_final:
         txt_tempo_data['text'] = "As eleições se encerraram!"
+        window_tempo_data.mainloop()
         return False
     else:
         dif_horario = horario_final - horario_atual
         txt_tempo_data['text'] = f"Ainda faltam {dif_horario} para encerrar as eleições"
+        window_tempo_data.mainloop()
         return True
 
 def criarArquivoEleitores():
@@ -111,6 +105,7 @@ def validarInformacoes():
     if re.fullmatch(padrao_nome, nome) == None:
         res_nome['text'] = "Nome inválido!\n"
         res_nome['text'] += "Digite-o novamente!"
+        input_nome.delete(0, tkinter.END)
     else:
         exist_nome = True
         res_nome['text'] = ""
@@ -126,10 +121,12 @@ def validarInformacoes():
             else:
                 res_cpf['text'] = "CPF inválido!\n"
                 res_cpf['text'] += "Digite-o novamente!"
+                input_cpf.delete(0, tkinter.END)
         else:
             if not(cpf.isnumeric()):
                 res_cpf['text'] = "CPF inválido!\n"
                 res_cpf['text'] += "Digite-o novamente!"
+                input_cpf.delete(0, tkinter.END)
             else:
                 exist_cpf = True
                 res_cpf['text'] = ""
@@ -137,6 +134,7 @@ def validarInformacoes():
         res_cpf['text'] = "Esse CPF não atende\n"
         res_cpf['text'] += "a quantidade correta!\n"
         res_cpf['text'] += "Digite-o novamente!"
+        input_cpf.delete(0, tkinter.END)
     for candidato in candidatos:
 
         nome_candidato, numero_candidato, votos_candidato = candidato.items()
@@ -161,6 +159,7 @@ def validarInformacoes():
         res_num_cand['text'] += "candidato não consta\n"
         res_num_cand['text'] += "no sistema!\n"
         res_num_cand['text'] += "Digite-o novamente!"
+        input_num_cand.delete(0, tkinter.END)
 
     if info_eleitores == [] and exist_candidato and exist_nome and exist_cpf:
 
@@ -171,7 +170,7 @@ def validarInformacoes():
         res_confirmar['text'] = "Voto Confirmado!\n" 
         res_confirmar['text'] += "Obrigado!"
 
-        time.sleep(10)
+        window_eleitores.destroy()
   
     else:
 
@@ -187,7 +186,7 @@ def validarInformacoes():
                     res_confirmar['text'] = "Voto Confirmado!\n" 
                     res_confirmar['text'] += "Obrigado!"
 
-                    time.sleep(10)
+                    window_eleitores.destroy()
 
                 else: 
                     res_confirmar['text'] = "Algumas da informações\n"
@@ -195,17 +194,22 @@ def validarInformacoes():
                     res_confirmar['fg'] = "#FF0000"
             else:
                 res_cpf['text'] = "Esse CPF consta como já votado!"
-
-    input_nome.delete(0, tkinter.END)
-    input_cpf.delete(0, tkinter.END)
-    input_num_cand.delete(0, tkinter.END)
+                input_cpf.delete(0, tkinter.END)
 
 while True:
+
+    window_tempo_data = tkinter.Tk()
+    window_tempo_data.title("Informação Tempo/Data")
+    window_tempo_data.configure(background=background)
+    window_tempo_data.geometry("350x50")
+
+    txt_tempo_data = tkinter.Label(master=window_tempo_data, bg=background, font=font_family, fg=font_color, anchor="w", text="")
+    txt_tempo_data.grid(padx=10, pady=10)
 
     if isValidDay():
 
         if isValidTime():
-            
+
             window_tempo_data.mainloop()
 
         # Janela para realizar voto
