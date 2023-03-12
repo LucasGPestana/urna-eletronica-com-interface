@@ -1,4 +1,4 @@
-import datetime, os , time, tkinter, re
+import datetime, os, tkinter, re
 
 font_family = ("Arial 10")
 font_color = "#FFFFFF"
@@ -135,12 +135,6 @@ def validarInformacoes():
         res_cpf['text'] += "a quantidade correta!\n"
         res_cpf['text'] += "Digite-o novamente!"
         input_cpf.delete(0, tkinter.END)
-    for candidato in candidatos:
-
-        nome_candidato, numero_candidato, votos_candidato = candidato.items()
-
-        print(f"{nome_candidato} - {numero_candidato}".center(50))
-
 
     candidato_escolhido = input_num_cand.get()
 
