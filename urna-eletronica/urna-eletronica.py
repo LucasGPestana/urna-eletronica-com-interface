@@ -1,12 +1,8 @@
-import datetime, os, tkinter, re
+import datetime, tkinter, re
 
 font_family = ("Arial 10")
 font_color = "#FFFFFF"
 background = "#1e1e1e"
-
-def limpaTela():
-    
-    os.system('cls') or None
 
 def fecharJanela():
     
@@ -98,10 +94,10 @@ def validarInformacoes():
     exist_nome = False
     exist_cpf = False
 
-    nome = input_nome.get()
+    nome = input_nome.get().capitalize()
 
-    padrao_nome = re.compile("^[\S][a-zA-Z\s\D]+")
-    padrao2_nome = re.compile("[\S]")
+    padrao_nome = re.compile("[a-zA-Z\D]+")
+    padrao2_nome = re.compile("[\S]+")
 
     if re.fullmatch(padrao_nome, nome) == None:
         res_nome['text'] = "Nome inválido!\n"
@@ -166,9 +162,6 @@ def validarInformacoes():
 
         info_eleitores.append((cpf, nome, candidato_escolhido))
 
-        res_confirmar['text'] = "Voto Confirmado!\n" 
-        res_confirmar['text'] += "Obrigado!"
-
         window_eleitores.destroy()
   
     else:
@@ -181,9 +174,6 @@ def validarInformacoes():
                     votos_confirmados.append(candidato_escolhido)
 
                     info_eleitores.append((cpf, nome, candidato_escolhido))
-
-                    res_confirmar['text'] = "Voto Confirmado!\n" 
-                    res_confirmar['text'] += "Obrigado!"
 
                     window_eleitores.destroy()
 
@@ -213,10 +203,6 @@ while True:
 
         # Janela para realizar voto
 
-            font_family = ("Arial 10")
-            font_color = "#FFFFFF"
-            background = "#1e1e1e"
-
             window_eleitores = tkinter.Tk()
             window_eleitores.title("Realizar Voto")
             window_eleitores.geometry("500x600")
@@ -224,7 +210,7 @@ while True:
 
 
             # Campo Nome
-            txt_nome = tkinter.Label(master=window_eleitores, text="Nome do Eleitor", anchor='w', font=font_family , bg=background, fg=font_color)
+            txt_nome = tkinter.Label(master=window_eleitores, text="1° Nome do Eleitor", anchor='w', font=font_family , bg=background, fg=font_color)
             txt_nome.grid(row=0, column=0, padx=5, pady=10)
 
             input_nome = tkinter.Entry(master=window_eleitores, bg="#DADADA")
@@ -283,10 +269,6 @@ while True:
 contagemDeVotos()
 
 ranking = realizarClassificacao()
-
-font_family = ("Arial 10")
-font_color = "#FFFFFF"
-background = "#1e1e1e"
 
 window_winner = tkinter.Tk()
 window_winner.geometry('40x20')
