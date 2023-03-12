@@ -3,4 +3,4 @@
  
  __Feito por:__ Lucas Gabriel Pereira Pestana
  
- [Versão sem interface](https://github.com/LucasGPestana/urna-eletronica)
+ [Versão sem Interface](https://github.com/LucasGPestana/urna-eletronica)
